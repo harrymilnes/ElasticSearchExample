@@ -7,6 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MessageBus.Core\MessageBus.Core.csproj" />
+      <ProjectReference Include="..\Search.Core\Search.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>

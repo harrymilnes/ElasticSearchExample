@@ -5,22 +5,28 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SearchIndexerExample.Consumers;
 using Microsoft.Extensions.Hosting;
+using Search.Core.ClientCreator;
+using Search.Core.ClientCreator.Interfaces;
+using Search.Core.Configuration;
+using Search.Core.Configuration.Interfaces;
+using Search.Core.Services;
+using Search.Core.Services.Interfaces;
 using SearchIndexerExample.HostedServices;
 
 namespace SearchIndexerExample
 {
-    class Program
+    internal static class Program
     {
-        public static async Task Main()
+        private static async Task Main()
         {
-            var host = ConfigureServices();
-            await host.UseSystemd().StartAsync();
+            var hostBuilder = ConfigureServices();
+            await hostBuilder.UseSystemd().StartAsync();
         }
         
         private static HostBuilder ConfigureServices()
         {
             var hostBuilder = new HostBuilder();
-            hostBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+            hostBuilder.ConfigureAppConfiguration((_, config) =>
             {
                 config.AddJsonFile("appsettings.json", true);
             });
@@ -49,6 +55,9 @@ namespace SearchIndexerExample
                 });
 
                 serviceCollection.AddHostedService<MessageBusHostedService>();
+                serviceCollection.AddTransient<ISearchConfiguration, SearchConfiguration>();
+                serviceCollection.AddTransient<IClientCreator, ClientCreator>();
+                serviceCollection.AddTransient<IRecordDocumentService, RecordDocumentService>();
             });
             
 

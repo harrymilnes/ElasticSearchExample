@@ -1,10 +1,10 @@
-﻿namespace Search.Core.Configuration.Interfaces
+﻿using System;
+
+namespace Search.Core.Configuration.Interfaces
 {
     public interface ISearchConfiguration
     { 
-        string Hostname { get; } 
-        string Username { get; }
-        string Password { get; }
+        Uri Uri { get; } 
         int Fuzziness { get; }
     }
 }

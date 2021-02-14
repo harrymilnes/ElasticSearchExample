@@ -2,10 +2,10 @@
 {
     public class RecordDocument
     {
-        public string Sku { get; private init; }
-        public string Title { get; private init; }
-        public string Description { get; private init; }
-        public decimal Price { get; private init; }
+        public string Sku { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
 
         public static RecordDocument Create(
             string sku,

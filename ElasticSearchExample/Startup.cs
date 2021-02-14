@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Search.Core.ClientCreator;
+using Search.Core.ClientCreator.Interfaces;
+using Search.Core.Configuration;
+using Search.Core.Configuration.Interfaces;
 using Search.Core.Services;
 using Search.Core.Services.Interfaces;
 
@@ -40,6 +44,9 @@ namespace ElasticSearchExample
 
             services.AddTransient<IRecordSearchService, RecordSearchService>();
             services.AddTransient<IMessageBusService, MessageBusService>();
+            services.AddTransient<IRecordDocumentService, RecordDocumentService>();
+            services.AddTransient<ISearchConfiguration, SearchConfiguration>();
+            services.AddTransient<IClientCreator, ClientCreator>();
         }
 
         private void ConfigureMassTransitServices(IServiceCollection services)
