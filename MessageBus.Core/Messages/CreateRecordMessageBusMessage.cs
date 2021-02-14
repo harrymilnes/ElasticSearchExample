@@ -1,13 +1,14 @@
-﻿namespace MessageBus.Core.Messages
+﻿
+namespace MessageBus.Core.Messages
 {
-    public class CreateRecordMessage
+    public class CreateRecordMessageBusMessage
     {
         public string Sku { get; private init; }
         public string Title { get; private init; }
         public string Description { get; private init; }
         public decimal Price { get; private init; }
 
-        public static CreateRecordMessage Create(
+        public static CreateRecordMessageBusMessage Create(
             string sku,
             string title,
             string description,

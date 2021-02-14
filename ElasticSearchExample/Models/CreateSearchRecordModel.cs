@@ -7,18 +7,18 @@ namespace ElasticSearchExample.Models
     {
         [JsonProperty]
         [Required(AllowEmptyStrings = false)]
-        public string Sku { get; private set; }
+        public string Sku { get; set; }
         
         [JsonProperty]
         [Required(AllowEmptyStrings = false)]
-        public decimal Price { get; private set; }
+        public string Title { get; set; }
         
         [JsonProperty]
         [Required(AllowEmptyStrings = false)]
-        public string Title { get; private set; }
+        public string Description { get; set; }
         
         [JsonProperty]
         [Required(AllowEmptyStrings = false)]
-        public string Description { get; private set; }
+        public decimal Price { get; set; }
     }
 }

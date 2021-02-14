@@ -3,6 +3,8 @@
     public interface IMessageBusConfiguration
     {
         public string Hostname { get; }
-        public int Port { get; }
+        public ushort Port { get; }
+        public string VirtualHost { get; }
+        public string SearchRecordQueueName { get; }
     }
 }

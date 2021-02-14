@@ -1,9 +1,17 @@
+using System;
+using MassTransit;
+using MessageBus.Core.Configuration;
+using MessageBus.Core.Messages;
+using MessageBus.Core.Services;
+using MessageBus.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Search.Core.Services;
+using Search.Core.Services.Interfaces;
 
 namespace ElasticSearchExample
 {
@@ -16,7 +24,7 @@ namespace ElasticSearchExample
 
         private IConfiguration Configuration { get; }
 
-        public static void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -26,6 +34,30 @@ namespace ElasticSearchExample
                     Title = "ElasticSearchExample",
                     Version = "v1"
                 });
+            });
+
+            ConfigureMassTransitServices(services);
+
+            services.AddTransient<IRecordSearchService, RecordSearchService>();
+            services.AddTransient<IMessageBusService, MessageBusService>();
+        }
+
+        private void ConfigureMassTransitServices(IServiceCollection services)
+        {
+            var messageBusConfiguration = new MessageBusConfiguration(Configuration);
+
+            services.AddMassTransit(serviceCollectionBusConfigurator =>
+            {
+                serviceCollectionBusConfigurator.UsingRabbitMq((_, rabbitMqBusFactoryConfigurator) =>
+                {
+                    rabbitMqBusFactoryConfigurator.Host(
+                        messageBusConfiguration.Hostname,
+                        messageBusConfiguration.Port,
+                        messageBusConfiguration.VirtualHost,
+                        null);
+                });
+
+                EndpointConvention.Map<CreateRecordMessageBusMessage>(new Uri($"queue:{messageBusConfiguration.SearchRecordQueueName}"));
             });
         }
 

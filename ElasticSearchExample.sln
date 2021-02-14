@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus.Core", "MessageB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearchExample", "ElasticSearchExample\ElasticSearchExample.csproj", "{B73AB0D8-42D3-41B6-9A70-485D0BAC0389}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchIndexerExample", "SearchIndexerExample\SearchIndexerExample.csproj", "{BFED0130-6767-4CD8-9607-6115A601A603}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{B73AB0D8-42D3-41B6-9A70-485D0BAC0389}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B73AB0D8-42D3-41B6-9A70-485D0BAC0389}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B73AB0D8-42D3-41B6-9A70-485D0BAC0389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFED0130-6767-4CD8-9607-6115A601A603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFED0130-6767-4CD8-9607-6115A601A603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFED0130-6767-4CD8-9607-6115A601A603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFED0130-6767-4CD8-9607-6115A601A603}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
