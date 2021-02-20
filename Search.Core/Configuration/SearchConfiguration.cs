@@ -18,11 +18,5 @@ namespace Search.Core.Configuration
         {
             return _configuration.GetValue<Uri>("ElasticSearch:Hostname");
         }
-        
-        public int Fuzziness => GetFuzziness();
-        private int GetFuzziness()
-        {
-            return _configuration.GetValue<int>("ElasticSearch:Fuzziness");
-        }
     }
 }

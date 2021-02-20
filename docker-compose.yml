@@ -1,0 +1,50 @@
+version: "3"
+services:
+  rabbitmq:
+    hostname: "rabbitmq"
+    image: "rabbitmq:management-alpine"
+    networks:
+      - elastic-example-network
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  elasticsearch:
+    hostname: "elasticsearch"
+    image: "elasticsearch:7.10.1"
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - elastic-example-network
+    ports:
+      - "9200:9200"
+    depends_on:
+      - rabbitmq
+
+  search-indexer:
+    build:
+      context: ./
+      dockerfile: ./SearchIndexerExampleDockerfile
+    networks:
+      - elastic-example-network
+    depends_on:
+      - elasticsearch
+      - rabbitmq
+
+  search-api:
+    build:
+      context: ./
+      dockerfile: ./ElasticSearchExampleDockerfile
+    ports:
+      - "80:80"
+    networks:
+      - elastic-example-network
+    depends_on:
+      - search-indexer
+      - elasticsearch
+      - rabbitmq
+
+networks:
+  elastic-example-network:
+    name: example-network

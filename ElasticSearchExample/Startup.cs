@@ -42,7 +42,6 @@ namespace ElasticSearchExample
 
             ConfigureMassTransitServices(services);
 
-            services.AddTransient<IRecordSearchService, RecordSearchService>();
             services.AddTransient<IMessageBusService, MessageBusService>();
             services.AddTransient<IRecordDocumentService, RecordDocumentService>();
             services.AddTransient<ISearchConfiguration, SearchConfiguration>();
@@ -73,10 +72,11 @@ namespace ElasticSearchExample
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ElasticSearchExample v1"));
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ElasticSearchExample v1"));
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

@@ -5,6 +5,6 @@ namespace MessageBus.Core.Services.Interfaces
 {
     public interface IMessageBusService
     {
-        Task PublicCreateRecordMessage(CreateRecordMessageBusMessage createRecordMessageBusMessage);
+        Task SendCreateRecordMessageAsync(CreateRecordMessageBusMessage createRecordMessageBusMessage);
     }
 }

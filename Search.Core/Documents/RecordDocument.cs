@@ -1,11 +1,15 @@
-﻿namespace Search.Core.Documents
+﻿using Nest;
+
+namespace Search.Core.Documents
 {
     public class RecordDocument
     {
-        public string Sku { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+        public string Sku { get; init; }
+        [Keyword(SplitQueriesOnWhitespace = false)]
+        public string Title { get; init; }
+        [Keyword(SplitQueriesOnWhitespace = false)]
+        public string Description { get; init; }
+        public decimal Price { get; init; }
 
         public static RecordDocument Create(
             string sku,

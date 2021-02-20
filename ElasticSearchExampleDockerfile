@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+WORKDIR /app
+
+COPY ["/ElasticSearchExample/ElasticSearchExample.csproj", "ElasticSearchExample/"]
+COPY ["/Search.Core/Search.Core.csproj", "Search.Core/"]
+COPY ["/MessageBus.Core/MessageBus.Core.csproj", "MessageBus.Core/"]
+RUN dotnet restore "ElasticSearchExample/ElasticSearchExample.csproj"
+
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "ElasticSearchExample.dll"]

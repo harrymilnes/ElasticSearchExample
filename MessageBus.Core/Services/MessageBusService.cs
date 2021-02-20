@@ -20,20 +20,15 @@ namespace MessageBus.Core.Services
             _busControl = busControl;
         }
 
-        public async Task PublicCreateRecordMessage(CreateRecordMessageBusMessage messageBusMessage)
+        public async Task SendCreateRecordMessageAsync(CreateRecordMessageBusMessage messageBusMessage)
         {
             try
             {
-                await _busControl.StartAsync();
                 await _busControl.Send(messageBusMessage);
             }
             catch(Exception exception)
             {
                 _logger.Log(LogLevel.Critical, exception, exception.Message);
-            }
-            finally
-            {
-                await _busControl.StopAsync();
             }
         }
     }

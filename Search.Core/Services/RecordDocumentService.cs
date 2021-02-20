@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Nest;
 using Search.Core.ClientCreator.Interfaces;
 using Search.Core.Documents;
 using Search.Core.Services.Interfaces;
